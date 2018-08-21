@@ -1,15 +1,10 @@
 ---
-- name: Get list of installed plugins.
-  command: "./bin/kibana-plugin list"
-  args:
-    chdir: "/usr/share/kibana"
-  register: kibana_plugins_list
-  changed_when: false
-
 - name: Install kibana plugins
-  command: "./bin/kibana-plugin install {{ item.plugin }}"
+  command: "./bin/kibana-plugin install {{ item }}"
   args:
     chdir: "/usr/share/kibana"
   with_items: "{{ kibana_plugins }}"
-  when: kibana_plugins != "" and kibana_plugins_list.stdout.find(item.plugin) != -1
+  when: kibana_plugins != ""
+  register: result
+  failed_when: ( result.rc not in [ 0, 70 ] )
 ...
