@@ -49,10 +49,12 @@ elasticsearch.password: {{ kibana_searchguard_password }}
 # If you need to provide a CA certificate for your Elasticsearch instance, put
 # the path of the pem file here.
 # elasticsearch.ssl.ca: /path/to/your/CA.pem
+elasticsearch.ssl.certificateAuthorities: {{ kibana_elasticsearch_ca }}
 
 # Set to false to have a complete disregard for the validity of the SSL
 # certificate.
 # elasticsearch.ssl.verify: true
+elasticsearch.ssl.verificationMode: {{ kibana_elasticsearch_ssl_verification_mode }}
 
 # Time in milliseconds to wait for elasticsearch to respond to pings, defaults to
 # request_timeout setting
